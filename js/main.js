@@ -1,3 +1,4 @@
+//Activity 3
 //initialize function called when the script loads
 function initialize(){
     cities();
@@ -111,3 +112,30 @@ function addEvents(){
 
 //add event listener for DOMContentLoaded to initialize the script
 document.addEventListener('DOMContentLoaded', initialize);
+
+
+//Activty 4
+//declares variable myData to hold json data
+var myData;
+
+//defines function
+function debugAjax(){
+	//fetch function to recieve data
+	fetch("/MegaCities.geojson")
+        //returns a promise which resolves with the result of parsing the body text as JSON
+		.then(function(response){
+            return response.json();
+        })
+        //sets the empty variable equal to what is contained withi the json
+        .then(function(response){
+            //sets my data = to response variable (the json)
+            myData = response;
+            //selects ands inserts myData as a string into the DOM, 
+            document.querySelector("#mydiv").insertAdjacentHTML('beforeend', 'GeoJSON data: ' + JSON.stringify(myData))
+
+        })
+
+};
+
+//calls the above function to add json data to page
+debugAjax()
